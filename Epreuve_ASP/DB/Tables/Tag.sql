@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[Tag]
+(
+	[Tag] NVARCHAR (64) NOT NULL PRIMARY KEY
+)
