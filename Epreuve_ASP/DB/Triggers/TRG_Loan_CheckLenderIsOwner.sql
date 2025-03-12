@@ -1,6 +1,7 @@
 ﻿CREATE TRIGGER [TRG_Loan_CheckLenderIsOwner]
 	ON [dbo].[Loan]
-	FOR INSERT, UPDATE
+	-- vérification uniquement lors de l'insertion, pas lors de la modification
+	FOR INSERT
 	AS
 	BEGIN
 		SET NOCOUNT ON

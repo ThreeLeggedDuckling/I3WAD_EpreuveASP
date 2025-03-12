@@ -2,7 +2,7 @@
 (
 	[Copy_Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
 	[Game] UNIQUEIDENTIFIER NOT NULL,	-- jeux insupprimable
-	[Owner] UNIQUEIDENTIFIER NOT NULL,	-- besoin trace
+	[Owner] UNIQUEIDENTIFIER,			-- nullable pour suppression dans ludothèque utilisateur
 	[State] NVARCHAR (10) NOT NULL,
 
 	CONSTRAINT [PK_Copy] PRIMARY KEY ([Copy_Id]),
@@ -13,7 +13,7 @@
 	-- FK propriétaire
 	CONSTRAINT [FK_Copy_Owner] FOREIGN KEY ([Owner])
 		REFERENCES [User]([User_Id])
-		ON DELETE CASCADE,
+		ON DELETE SET NULL,
 	-- FK état
 	CONSTRAINT [CK_Copy_State] CHECK ([State] in ('New', 'Damaged', 'Incomplete'))
 )

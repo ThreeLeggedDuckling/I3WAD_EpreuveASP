@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Loan]
 (
-	[Copy] UNIQUEIDENTIFIER NOT NULL,
+	[Copy] UNIQUEIDENTIFIER NOT NULL,		-- besoin trace
 	[Loan_Date] DATETIME2 NOT NULL,
 	[Return_Date] DATETIME2,
 	[Lender] UNIQUEIDENTIFIER NOT NULL,		-- besoin trace
@@ -27,7 +27,7 @@
 
 	-- contraintes validées par trigger :
 		-- prêteur = propriétaire
-		-- état != 'Incomplete'
+		-- état exemplaire != 'Incomplete'
 )
 GO
 
