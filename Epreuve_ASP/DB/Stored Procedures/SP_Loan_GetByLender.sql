@@ -5,7 +5,7 @@ BEGIN
 	SELECT [Loan_Id],
 			[Copy],
 			[Borrower],
-			[Borrower_Score]
+			[BorrowerScore]
 	FROM [Loan]
 	WHERE [Lender] = @lender
 END

@@ -2,7 +2,7 @@
 	@name NVARCHAR(150)
 AS
 BEGIN
-	SELECT [Game_Id], [Name], [Description], [Age_Min], [Age_Max], [Nb_Players_Min], [Nb_Players_Max], [Playing_Time]
+	SELECT [Game_Id], [Name], [Description], [AgeMin], [AgeMax], [NbPlayersMin], [NbPlayersMax], [PlayingTime]
 	FROM [Game]
 	WHERE [Name] LIKE @name		-- ajouter wildcard + protection injection
 END

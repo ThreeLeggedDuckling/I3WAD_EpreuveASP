@@ -1,4 +1,6 @@
 ﻿using Common.Repositories;
+using DAL.Entities;
+using DAL.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ConsoleTest
@@ -9,32 +11,33 @@ namespace ConsoleTest
         {
             /*  Console de test pré base service (voir commit 2 feb)  */
 
+            #region Test DAL
+            // ajout services
+            UserService userService = new UserService();
 
-            /*  Test DAL Cocktail  */
-
-
-
-            //CocktailService service = new CocktailService();
-
-
-
-            /*  GetAll
+            /*  1. Insert
  
-            Console.WriteLine("TEST GET ALL");
+            Console.WriteLine("\nTEST INSERT");
  
-            foreach (Cocktail cocktail in service.GetAll())
+            User userInsert = new User() {
+                Username = "CT01",
+                Email = "ct01@test.net",
+                Password = "Test!1234"
+            };
  
-            {
+            Guid id_testInsert = service.Insert(userInsert);
  
-                Console.WriteLine($"{cocktail.Cocktail_Id} : {cocktail.Name}");
+            Cocktail checkTestInsert = service.GetById(id_testInsert);
  
-            }
+            Console.WriteLine($"{checkTestInsert.Name} ({checkTestInsert.CreatedBy}, {checkTestInsert.CreatedAt})");
+ 
+            Console.WriteLine($"Description : {checkTestInsert.Description}");
+ 
+            Console.WriteLine($"Instructions : {checkTestInsert.Instructions}");
  
             */
 
-
-
-            /*  GetById
+            /*  2. GetById
  
             Console.WriteLine("\nTEST GET BY ID");
  
@@ -69,38 +72,6 @@ namespace ConsoleTest
             */
 
 
-
-            /*  Insert
- 
-            Console.WriteLine("\nTEST INSERT");
- 
-            Cocktail testInsert = new Cocktail()
- 
-            {
- 
-                Name = "test",
- 
-                Description = null,
- 
-                Instructions = "...",
- 
-                //CreatedBy = Guid.Parse("365c1abc-2ef3-436a-945b-83abd143cd56")  // I3
- 
-                CreatedBy = Guid.Parse("967541bd-9f05-4816-a2d4-98a89f393e92")  // home
- 
-            };
- 
-            Guid id_testInsert = service.Insert(testInsert);
- 
-            Cocktail checkTestInsert = service.GetById(id_testInsert);
- 
-            Console.WriteLine($"{checkTestInsert.Name} ({checkTestInsert.CreatedBy}, {checkTestInsert.CreatedAt})");
- 
-            Console.WriteLine($"Description : {checkTestInsert.Description}");
- 
-            Console.WriteLine($"Instructions : {checkTestInsert.Instructions}");
- 
-            */
 
 
 
@@ -180,16 +151,13 @@ namespace ConsoleTest
  
             */
 
+            #endregion
 
-
-
-
-
+            #region Test BLL
 
             /*  Test BLL Cocktail  */
 
-
-
+            // ajout service
             //ServiceProvider serviceProvider = new ServiceCollection()
 
             //    .AddScoped<ICocktailRepository<DAL.Entities.Cocktail>, DAL.Services.CocktailService>()
@@ -405,6 +373,9 @@ namespace ConsoleTest
             }
  
             */
+
+            #endregion
+
         }
     }
 }

@@ -2,7 +2,7 @@
 	@game_id UNIQUEIDENTIFIER
 AS
 BEGIN
-	SELECT [Game_Id], [Name], [Description], [Age_Min], [Age_Max], [Nb_Players_Min], [Nb_Players_Max], [Playing_Time], [Created_At]
+	SELECT [Game_Id], [Name], [Description], [AgeMin], [AgeMax], [NbPlayersMin], [NbPlayersMax], [PlayingTime], [CreatedAt]
 	FROM [Game]
 	WHERE [Game_Id] = @game_id
 END

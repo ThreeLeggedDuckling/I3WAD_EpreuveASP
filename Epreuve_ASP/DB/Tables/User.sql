@@ -5,8 +5,8 @@
 	[Username] NVARCHAR (64) NOT NULL,
 	[Password] VARBINARY (64) NOT NULL,
 	[Salt] UNIQUEIDENTIFIER NOT NULL,	-- ajout salt pour sécurisation mdp
-	[Created_At] DATETIME2 NOT NULL DEFAULT GETDATE(),
-	[Disabled_At] DATETIME2,
+	[CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(),
+	[DisabledAt] DATETIME2,
 
 	CONSTRAINT [PK_User] PRIMARY KEY ([User_Id]),
 	CONSTRAINT [UK_User_Email] UNIQUE ([Email]),

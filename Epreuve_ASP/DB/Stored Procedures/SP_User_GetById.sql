@@ -4,8 +4,8 @@ AS
 BEGIN
 	SELECT [User_Id],
 			[Email],
-			[Created_At],
-			[Disabled_At]
+			[CreatedAt],
+			[DisabledAt]
 	FROM [User]
 	WHERE [User_Id] = @user_id
 END

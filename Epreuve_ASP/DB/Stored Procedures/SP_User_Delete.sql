@@ -4,6 +4,6 @@ AS
 BEGIN
 	-- utilisateur jamais supprimé de la db, juste désactivé
 	UPDATE [User]
-		SET [Disabled_At] = GETDATE()
+		SET [DisabledAt] = GETDATE()
 		WHERE [User_Id] = @user_id;
 END

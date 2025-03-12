@@ -3,14 +3,14 @@
 	[Game_Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
 	[Name] NVARCHAR (150) NOT NULL,
 	[Description] NVARCHAR (MAX) NOT NULL,
-	[Age_Min] TINYINT NOT NULL,
-	[Age_Max] TINYINT NOT NULL,
-	[Nb_Players_Min] TINYINT NOT NULL,
-	[Nb_Players_Max] TINYINT NOT NULL,
-	[Playing_Time] INT,
-	[Created_At] DATETIME2 NOT NULL DEFAULT GETDATE(),
+	[AgeMin] TINYINT NOT NULL,
+	[AgeMax] TINYINT NOT NULL,
+	[NbPlayersMin] TINYINT NOT NULL,
+	[NbPlayersMax] TINYINT NOT NULL,
+	[PlayingTime] INT,
+	[CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(),
 
 	CONSTRAINT [PK_Game] PRIMARY KEY ([Game_Id]),
-	CONSTRAINT [CK_Game_AgeDiff] CHECK ([Age_Min] < [Age_Max]),
-	CONSTRAINT [CK_Game_NbPlayersDiff] CHECK ([Nb_Players_Min] <= [Nb_Players_Max])
+	CONSTRAINT [CK_Game_AgeDiff] CHECK ([AgeMin] < [AgeMax]),
+	CONSTRAINT [CK_Game_NbPlayersDiff] CHECK ([NbPlayersMin] <= [NbPlayersMax])
 )

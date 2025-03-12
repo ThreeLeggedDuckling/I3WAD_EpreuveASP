@@ -6,8 +6,8 @@
 AS
 BEGIN
 	UPDATE [Loan]
-		SET [Return_Date] = ISNULL(@retun_date, [Return_Date]),
-			[Lender_Score] = ISNULL(@lender_score, [Lender_Score]),
-			[Borrower_Score] = ISNULL(@borrowerer_score, [Borrower_Score])
+		SET [ReturnDate] = ISNULL(@retun_date, [ReturnDate]),
+			[LenderScore] = ISNULL(@lender_score, [LenderScore]),
+			[BorrowerScore] = ISNULL(@borrowerer_score, [BorrowerScore])
 	WHERE [Loan_Id] = @loan_id
 END
