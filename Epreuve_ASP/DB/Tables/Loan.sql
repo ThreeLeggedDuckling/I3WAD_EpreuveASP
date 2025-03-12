@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[Loan]
 (
+	[Loan_Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
 	[Copy] UNIQUEIDENTIFIER NOT NULL,		-- besoin trace
 	[Loan_Date] DATETIME2 NOT NULL,
 	[Return_Date] DATETIME2,
@@ -9,7 +10,7 @@
 	[Borrower_Score] TINYINT,
 	
 	-- PK composite
-	CONSTRAINT [PK_Loan] PRIMARY KEY ([Copy], [Loan_Date]),
+	CONSTRAINT [PK_Loan] PRIMARY KEY ([Loan_Id]),
 	-- FK exemplaire
 	CONSTRAINT [FK_Loan_Game] FOREIGN KEY ([Copy])
 		REFERENCES [Copy]([Copy_Id]),
@@ -29,12 +30,3 @@
 		-- prêteur = propriétaire
 		-- état exemplaire != 'Incomplete'
 )
-GO
-
--- ajout d'index pour de meilleures performances de requête
-CREATE INDEX [IX_Loan_Copy] ON [dbo].[Loan] ([Copy])
-GO
-CREATE INDEX [IX_Loan_Lender] ON [dbo].[Loan] ([Lender])
-GO
-CREATE INDEX [IX_Loan_Borrower] ON [dbo].[Loan] ([Borrower])
-GO

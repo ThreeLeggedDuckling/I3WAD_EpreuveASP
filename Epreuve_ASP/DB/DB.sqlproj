@@ -73,12 +73,25 @@
     <Build Include="Stored Procedures\SP_User_Insert.sql" />
     <Build Include="Functions\SF_SaltAndHash.sql" />
     <Build Include="Stored Procedures\SP_User_Update.sql" />
-    <Build Include="Tables\TaggedGame.sql" />
+    <Build Include="Tables\GameTag.sql" />
     <Build Include="Stored Procedures\SP_User_Delete.sql" />
     <Build Include="Stored Procedures\SP_User_GetById.sql" />
     <Build Include="Stored Procedures\SP_User_CheckPassword.sql" />
     <Build Include="Stored Procedures\SP_Game_GetNPopular.sql" />
     <Build Include="Stored Procedures\SP_Loan_Insert.sql" />
+    <Build Include="Stored Procedures\SP_Tag_Insert.sql" />
+    <Build Include="Stored Procedures\SP_Loan_Update.sql" />
+    <Build Include="Stored Procedures\SP_Loan_GetByLender.sql" />
+    <Build Include="Stored Procedures\SP_Loan_GetByBorrower.sql" />
+    <Build Include="Stored Procedures\SP_Game_Insert.sql" />
+    <Build Include="Stored Procedures\SP_GameTag_Insert.sql" />
+    <Build Include="Stored Procedures\SP_Game_GetAll.sql" />
+    <Build Include="Stored Procedures\SP_Game_GetById.sql" />
+    <Build Include="Stored Procedures\SP_GameTag_GetByTag.sql" />
+    <Build Include="Stored Procedures\SP_Game_GetByName.sql" />
+    <Build Include="Stored Procedures\SP_Copy_Insert.sql" />
+    <Build Include="Stored Procedures\SP_Copy_Update.sql" />
+    <Build Include="Stored Procedures\SP_Copy_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Script.PreDeployment.sql" />
