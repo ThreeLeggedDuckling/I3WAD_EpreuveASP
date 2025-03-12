@@ -76,6 +76,7 @@
     <Build Include="Tables\TaggedGame.sql" />
     <Build Include="Stored Procedures\SP_User_Delete.sql" />
     <Build Include="Stored Procedures\SP_User_GetById.sql" />
+    <Build Include="Stored Procedures\SP_User_CheckPassword.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Script.PreDeployment.sql" />
