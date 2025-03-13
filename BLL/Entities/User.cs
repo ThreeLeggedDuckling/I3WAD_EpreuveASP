@@ -18,10 +18,14 @@ namespace BLL.Entities
         public bool IsDisabled {
             get { return _disabledAt is not null; }
         }
-        public IEnumerable<Copy> Games { get; set; }
+        public IEnumerable<Copy> OwnedGames { get; set; }
         public IEnumerable<Loan> LendedGames { get; set; }
         public IEnumerable<Loan> BorrowedGames { get; set; }
 
+        public User(Guid user_Id)
+        {
+            User_Id = user_Id;
+        }
         public User(string email, string username, string password)
         {
             Email = email;

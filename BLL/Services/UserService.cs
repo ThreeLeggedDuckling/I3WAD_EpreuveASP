@@ -1,12 +1,12 @@
 ﻿using Common.Repositories;
 using D = DAL.Entities;
+using BLL.Entities;
+using BLL.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BLL.Entities;
-using BLL.Mappers;
 
 namespace BLL.Services
 {
@@ -34,7 +34,7 @@ namespace BLL.Services
         public User Get(Guid user_id)
         {
             User user = _userService.Get(user_id).ToBLL();
-            //user.Games = ...
+            //user.OwnedGames = ...
             //user.LendedGames = ...
             //user.BorrowedGames = ...
 
