@@ -2,14 +2,15 @@
 	@nb_results TINYINT = 10
 AS
 BEGIN
-	SELECT TOP (@nb_results) [Game_Id], [Name]
-	FROM [Loan] AS l
-		INNER JOIN [Copy] AS c
-		ON l.[Copy] = c.[Copy_Id]
-		INNER JOIN [Game] AS g
-		ON c.[Game] = g.[Game_Id]
-	--GROUP BY 
-	--ORDER BY COUNT(l)
+	SELECT TOP (@nb_results)
+			COUNT(l.[Loan_Id]) [Loan_Count],
+			[Game_Id],
+			[Name]
+	FROM [Game] g
+		INNER JOIN [Copy] c
+		ON g.[Game_Id] = c.[Game]
+		INNER JOIN [Loan] l
+		ON c.[Copy_Id] = l.[Copy]
+	GROUP BY g.[Game_Id], g.[Name]
+	ORDER BY [Loan_Count] DESC
 END
-
-/*	A FINIR PROPREMENT	*/

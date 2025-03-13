@@ -4,6 +4,10 @@ AS
 BEGIN
 	SELECT [Loan_Id],
 			[Copy],
+			[LoanDate],
+			[ReturnDate],
+			[Lender],
+			[LenderScore],
 			[Borrower],
 			[BorrowerScore]
 	FROM [Loan]

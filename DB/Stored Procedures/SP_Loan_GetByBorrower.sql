@@ -4,8 +4,12 @@ AS
 BEGIN
 	SELECT [Loan_Id],
 			[Copy],
+			[LoanDate],
+			[ReturnDate],
 			[Lender],
-			[LenderScore]
+			[LenderScore],
+			[Borrower],
+			[BorrowerScore]
 	FROM [Loan]
 	WHERE [Borrower] = @borrower
 END

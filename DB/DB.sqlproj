@@ -87,7 +87,7 @@
     <Build Include="Stored Procedures\SP_GameTag_Insert.sql" />
     <Build Include="Stored Procedures\SP_Game_GetAll.sql" />
     <Build Include="Stored Procedures\SP_Game_GetById.sql" />
-    <Build Include="Stored Procedures\SP_GameTag_GetByTag.sql" />
+    <Build Include="Stored Procedures\SP_Game_GetByTag.sql" />
     <Build Include="Stored Procedures\SP_Game_GetByName.sql" />
     <Build Include="Stored Procedures\SP_Copy_Insert.sql" />
     <Build Include="Stored Procedures\SP_Copy_Update.sql" />
