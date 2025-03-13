@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[SP_Tag_Get]
+﻿CREATE PROCEDURE [dbo].[SP_Tag_GetById]
 	@tag NVARCHAR(10)
 AS
 BEGIN

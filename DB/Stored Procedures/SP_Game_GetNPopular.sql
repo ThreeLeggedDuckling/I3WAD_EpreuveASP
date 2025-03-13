@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[SP_Game_GetNPopular]
-	@nb_results TINYINT = 10
+	@nb_results TINYINT
 AS
 BEGIN
 	SELECT TOP (@nb_results)
