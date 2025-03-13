@@ -88,7 +88,7 @@ namespace DAL.Services
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = "SP_USer_Insert";
+                    cmd.CommandText = "SP_User_Update";
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue(nameof(user_id), user_id);
                     cmd.Parameters.AddWithValue(nameof(user.Username), user.Username);

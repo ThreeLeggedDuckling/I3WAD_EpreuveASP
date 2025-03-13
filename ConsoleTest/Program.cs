@@ -1,7 +1,10 @@
 ﻿using Common.Repositories;
-using DAL.Entities;
-using DAL.Services;
+//using DAL.Entities;
+//using DAL.Services;
+using BLL.Entities;
+using BLL.Services;
 using Microsoft.Extensions.DependencyInjection;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleTest
 {
@@ -11,273 +14,121 @@ namespace ConsoleTest
         {
             /*  Console de test pré base service (voir commit 2 feb)  */
 
-            #region Test DAL
-            // ajout services
-            UserService userService = new UserService();
+            #region Test DAL UserService
+            //UserService userService = new UserService();
 
-            /*  1. Insert
- 
-            Console.WriteLine("\nTEST INSERT");
- 
-            User userInsert = new User() {
-                Username = "CT01",
-                Email = "ct01@test.net",
+            /*  1. Insert + GetById
+            User userInsert = new User()
+            {
+                Username = "CT02",
+                Email = "ct02@test.net",
                 Password = "Test!1234"
             };
- 
-            Guid id_testInsert = service.Insert(userInsert);
- 
-            Cocktail checkTestInsert = service.GetById(id_testInsert);
- 
-            Console.WriteLine($"{checkTestInsert.Name} ({checkTestInsert.CreatedBy}, {checkTestInsert.CreatedAt})");
- 
-            Console.WriteLine($"Description : {checkTestInsert.Description}");
- 
-            Console.WriteLine($"Instructions : {checkTestInsert.Instructions}");
- 
-            */
 
-            /*  2. GetById
- 
-            Console.WriteLine("\nTEST GET BY ID");
- 
-            //Cocktail testById = service.GetById(Guid.Parse("59bbf71c-0585-477a-9de7-173ca1f99fd8"));    // I3
- 
-            Cocktail testById = service.GetById(Guid.Parse("46599bcb-f5b0-417d-b586-02ae8bbd702d"));    // home
- 
-            Console.WriteLine($"{testById.Name} ({testById.CreatedBy}, {testById.CreatedAt})");
- 
-            Console.WriteLine($"Description : {testById.Description}");
- 
-            Console.WriteLine($"Instructions : {testById.Instructions}");
- 
+            Console.WriteLine("TEST INSERT USER");
+            Guid userInsert_id = userService.Insert(userInsert);
+            User checkTestInsert = userService.Get(userInsert_id);
+
+            Console.WriteLine($"{checkTestInsert.Username} ({checkTestInsert.User_Id})");
+            Console.WriteLine(checkTestInsert.Email);
+            Console.WriteLine(checkTestInsert.Password);
+            Console.WriteLine(checkTestInsert.CreatedAt.ToShortTimeString());
+            Console.WriteLine((checkTestInsert.DisabledAt is null) ? "active account" : "disabled account");
             */
 
 
-
-            /*  GetByUser
- 
-            Console.WriteLine("\nTEST GET BY USER");
- 
-            //foreach (Cocktail cocktail in service.GetByUser(Guid.Parse("")))    // I3
- 
-            foreach (Cocktail cocktail in service.GetByUser(Guid.Parse("967541bd-9f05-4816-a2d4-98a89f393e92")))    // home
- 
+            /*  2. Update
+            User userUpdate = new User()
             {
- 
-                Console.WriteLine($"{cocktail.Cocktail_Id} : {cocktail.Name}");
- 
-            }
- 
+                User_Id = Guid.Parse("8141b015-2aff-4a41-a81b-070191d9e856"),   // I3
+                Username = "CT02-updated",
+            };
+
+            Console.WriteLine("TEST UPDATE");
+            Console.WriteLine("BEFORE");
+            User preUpdateUser = userService.Get(userUpdate.User_Id);
+            Console.WriteLine($"{preUpdateUser.User_Id} : {preUpdateUser.Username}");
+
+            Console.WriteLine("\nAFTER");
+            userService.Update(userUpdate.User_Id, userUpdate);
+            User postUpdateUser = userService.Get(userUpdate.User_Id);
+            Console.WriteLine($"{postUpdateUser.User_Id} : {postUpdateUser.Username}");
             */
 
 
-
-
-
-            /*  Update
- 
-            Console.WriteLine("\nTEST UPDATE");
- 
-            Cocktail testUpdate = new Cocktail()
- 
+            /*  3. Delete
+            User userDelete = new User()
             {
- 
-                //Cocktail_Id = Guid.Parse(),   // I3
- 
-                Cocktail_Id = Guid.Parse("38326ba3-bd9c-4dac-9d0a-af620e3e290a"),   // home
- 
-                Name = "Updated",
- 
-                Description = "A brand new version !",
- 
-                Instructions = "[UPDATED] ...",
- 
+                User_Id = Guid.Parse("8141b015-2aff-4a41-a81b-070191d9e856"),   // I3
             };
  
+            Console.WriteLine("TEST DELETE");
             Console.WriteLine("BEFORE");
- 
-            Cocktail preUpdateCheck = service.GetById(testUpdate.Cocktail_Id);
- 
-            Console.WriteLine($"{preUpdateCheck.Name} ({preUpdateCheck.CreatedBy}, {preUpdateCheck.CreatedAt})");
- 
-            Console.WriteLine($"Description : {preUpdateCheck.Description}");
- 
-            Console.WriteLine($"Instructions : {preUpdateCheck.Instructions}");
- 
-            service.Update(testUpdate.Cocktail_Id, testUpdate);
- 
-            Console.WriteLine("\nAFTER");
- 
-            Cocktail postUpdateCheck = service.GetById(testUpdate.Cocktail_Id);
- 
-            Console.WriteLine($"{postUpdateCheck.Name} ({postUpdateCheck.CreatedBy}, {postUpdateCheck.CreatedAt})");
- 
-            Console.WriteLine($"Description : {postUpdateCheck.Description}");
- 
-            Console.WriteLine($"Instructions : {postUpdateCheck.Instructions}");
- 
+            User preDeleteUser = userService.Get(userDelete.User_Id);
+            Console.WriteLine($"{preDeleteUser.Username} ({preDeleteUser.User_Id})");
+            Console.WriteLine(preDeleteUser.CreatedAt.ToShortTimeString());
+            Console.WriteLine((preDeleteUser.DisabledAt is null) ? "active account" : "disabled account");
+
+            Console.WriteLine("AFTER");
+            userService.Delete(userDelete.User_Id);
+            User postDeleteUser = userService.Get(userDelete.User_Id);
+            Console.WriteLine($"{postDeleteUser.Username} ({postDeleteUser.User_Id})");
+            Console.WriteLine(postDeleteUser.CreatedAt.ToShortTimeString());
+            Console.WriteLine((postDeleteUser.DisabledAt is null) ? "active account" : "disabled account");
             */
 
 
+            /*  4. CheckPassword
+            string userEmail = "ct01@test.net";
+            string userPasswordOK = "Test!1234";
+            string userPasswordKO = "....";
 
-            /*  Delete
- 
-            Console.WriteLine("\nTEST DELETE");
- 
-            Console.WriteLine("BEFORE");
- 
-            foreach (Cocktail cocktail in service.GetAll())
- 
-            {
- 
-                Console.WriteLine($"{cocktail.Cocktail_Id} : {cocktail.Name}");
- 
-            }
- 
-            //service.Delete(Guid.Parse("38326ba3-bd9c-4dac-9d0a-af620e3e290a")); // I3
- 
-            service.Delete(Guid.Parse("a9f90128-1ae7-42b2-a852-1cc195106ff1")); // home
- 
-            Console.WriteLine("\nAFTER");
- 
-            foreach (Cocktail cocktail in service.GetAll())
- 
-            {
- 
-                Console.WriteLine($"{cocktail.Cocktail_Id} : {cocktail.Name}");
- 
-            }
- 
+            Console.WriteLine("TEST CHECKPASSWORD");
+            Console.WriteLine("SUCCESS");
+            Console.WriteLine(userService.CheckPassword(userEmail, userPasswordOK));
+            Console.WriteLine("FAIL");    // pas implémenté !!!
+            Console.WriteLine(userService.CheckPassword(userEmail, userPasswordKO));
             */
-
             #endregion
 
-            #region Test BLL
+            #region Test BLL UserService
+            ServiceProvider serviceProvider = new ServiceCollection()
+                .AddScoped<IUserRepository<DAL.Entities.User>, DAL.Services.UserService>()
+                .AddScoped<UserService>()
+                .BuildServiceProvider();
+            UserService userService = serviceProvider.GetRequiredService<UserService>();
 
-            /*  Test BLL Cocktail  */
+            /*  1. Insert + Get
+            User userInsert = new User("CT03", "ct03@test.net", "Test!1234");
 
-            // ajout service
-            //ServiceProvider serviceProvider = new ServiceCollection()
+            Console.WriteLine("TEST INSERT");
+            Guid userInsert_id = userService.Insert(userInsert);
+            User checkTestInsert = userService.Get(userInsert_id);
 
-            //    .AddScoped<ICocktailRepository<DAL.Entities.Cocktail>, DAL.Services.CocktailService>()
+            Console.WriteLine($"{checkTestInsert.Username} ({checkTestInsert.User_Id})");
+            Console.WriteLine(checkTestInsert.Email);
+            Console.WriteLine(checkTestInsert.Password);
+            Console.WriteLine(checkTestInsert.CreatedAt.ToShortTimeString());
+            Console.WriteLine(checkTestInsert.IsDisabled ? "disabled account" : "active account");
+            */
 
-            //    .AddScoped<CocktailService>()
-
-            //    .BuildServiceProvider();
-
-            //CocktailService service = serviceProvider.GetRequiredService<CocktailService>();
-
-
-
-            /*  GetAll
- 
-            Console.WriteLine("TEST GET ALL");
- 
-            foreach (Cocktail cocktail in service.GetAll())
- 
+            /*  2. Update
+            User userUpdate = new User()
             {
- 
-                Console.WriteLine($"{cocktail.Cocktail_Id} : {cocktail.Name}");
- 
-            }
- 
+                User_Id = Guid.Parse("8141b015-2aff-4a41-a81b-070191d9e856"),   // I3
+                Username = "CT02-updated",
+            };
+
+            Console.WriteLine("TEST UPDATE");
+            Console.WriteLine("BEFORE");
+            User preUpdateUser = userService.Get(userUpdate.User_Id);
+            Console.WriteLine($"{preUpdateUser.User_Id} : {preUpdateUser.Username}");
+
+            Console.WriteLine("\nAFTER");
+            userService.Update(userUpdate.User_Id, userUpdate);
+            User postUpdateUser = userService.Get(userUpdate.User_Id);
+            Console.WriteLine($"{postUpdateUser.User_Id} : {postUpdateUser.Username}");
             */
-
-
-
-            /*  GetById
- 
-            Console.WriteLine("\nTEST GET BY ID");
- 
-            //Cocktail testById = service.GetById(Guid.Parse("59bbf71c-0585-477a-9de7-173ca1f99fd8"));    // I3
- 
-            Cocktail testById = service.GetById(Guid.Parse("46599bcb-f5b0-417d-b586-02ae8bbd702d"));    // home
- 
-
-            Console.WriteLine($"{testById.Name} ({testById.CreatedBy}, {testById.CreatedAt})");
- 
-
-            Console.WriteLine(testById.Name);
- 
-
-            Console.WriteLine($"By [user] ({testById.CreatedBy})");
- 
-
-            Console.WriteLine($"Posted on {testById.CreatedAt}");
- 
-            Console.WriteLine($"Description : {testById.Description}");
- 
-
-            Console.WriteLine($"Instructions : {testById.Instructions}");
- 
-
-            Console.WriteLine("Instructions :");
- 
-
-            Console.WriteLine(testById.Instructions);
- 
-            */
-
-
-
-            /*  GetByUser
- 
-            Console.WriteLine("\nTEST GET BY USER");
- 
-            //foreach (Cocktail cocktail in service.GetByUser(Guid.Parse("")))    // I3
- 
-            foreach (Cocktail cocktail in service.GetByUser(Guid.Parse("967541bd-9f05-4816-a2d4-98a89f393e92")))    // home
- 
-                {
- 
-                Console.WriteLine($"{cocktail.Cocktail_Id} : {cocktail.Name}");
- 
-            }
- 
-            */
-
-
-
-            /*  Insert
- 
-            Console.WriteLine("\nTEST INSERT");
- 
-            //Cocktail testInsert = new Cocktail("test", null, "...", Guid.Parse("365c1abc-2ef3-436a-945b-83abd143cd56"));    // I3
- 
-            Cocktail testInsert = new Cocktail("test", null, "...", Guid.Parse("967541bd-9f05-4816-a2d4-98a89f393e92"));    // home
- 
-            Guid id_testInsert = service.Insert(testInsert);
- 
-            Cocktail checkTestInsert = service.GetById(id_testInsert);
- 
-
-            Console.WriteLine($"{checkTestInsert.Name} ({checkTestInsert.CreatedBy}, {checkTestInsert.CreatedAt})");
- 
-
-            Console.WriteLine(checkTestInsert.Name");
- 
-
-            Console.WriteLine($"By [user] ({checkTestInsert.CreatedBy})");
- 
-
-            Console.WriteLine($"Posted on {checkTestInsert.CreatedAt}");
- 
-            Console.WriteLine($"Description : {checkTestInsert.Description}");
- 
-
-            Console.WriteLine($"Instructions : {checkTestInsert.Instructions}");
- 
-
-            Console.WriteLine("Instructions :");
- 
-
-            Console.WriteLine(checkTestInsert.Instructions");
- 
-            */
-
-
-
             /*  Update
  
             Console.WriteLine("\nTEST UPDATE");
@@ -291,14 +142,10 @@ namespace ConsoleTest
                 Cocktail_Id = Guid.Parse("3bd259fa-676c-43df-815d-528b7c7046db"),   // home
  
             };
- 
-
- 
             Console.WriteLine("BEFORE");
  
             Cocktail preUpdateCheck = service.GetById(testUpdate.Cocktail_Id);
  
-
             Console.WriteLine($"{preUpdateCheck.Name} ({preUpdateCheck.CreatedBy}, {preUpdateCheck.CreatedAt})");
  
 
@@ -341,6 +188,47 @@ namespace ConsoleTest
             Console.WriteLine(postUpdateCheck.Instructions");
  
             */
+
+
+            /*  3. Delete
+            User userDelete = new User()
+            {
+                User_Id = Guid.Parse("8141b015-2aff-4a41-a81b-070191d9e856"),   // I3
+            };
+ 
+            Console.WriteLine("TEST DELETE");
+            Console.WriteLine("BEFORE");
+            User preDeleteUser = userService.Get(userDelete.User_Id);
+            Console.WriteLine($"{preDeleteUser.Username} ({preDeleteUser.User_Id})");
+            Console.WriteLine(preDeleteUser.CreatedAt.ToShortTimeString());
+            Console.WriteLine((preDeleteUser.DisabledAt is null) ? "active account" : "disabled account");
+
+            Console.WriteLine("AFTER");
+            userService.Delete(userDelete.User_Id);
+            User postDeleteUser = userService.Get(userDelete.User_Id);
+            Console.WriteLine($"{postDeleteUser.Username} ({postDeleteUser.User_Id})");
+            Console.WriteLine(postDeleteUser.CreatedAt.ToShortTimeString());
+            Console.WriteLine((postDeleteUser.DisabledAt is null) ? "active account" : "disabled account");
+            */
+
+
+            /*  4. CheckPassword
+            string userEmail = "ct01@test.net";
+            string userPasswordOK = "Test!1234";
+            string userPasswordKO = "....";
+
+            Console.WriteLine("TEST CHECKPASSWORD");
+            Console.WriteLine("SUCCESS");
+            Console.WriteLine(userService.CheckPassword(userEmail, userPasswordOK));
+            Console.WriteLine("FAIL");    // pas implémenté !!!
+
+            Console.WriteLine(userService.CheckPassword(userEmail, userPasswordKO));
+            */
+
+
+
+
+
 
 
 

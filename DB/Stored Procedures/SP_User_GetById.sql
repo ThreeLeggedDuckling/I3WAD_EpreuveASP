@@ -4,6 +4,9 @@ AS
 BEGIN
 	SELECT [User_Id],
 			[Email],
+			[Username],
+			[Password],
+			[Salt],
 			[CreatedAt],
 			[DisabledAt]
 	FROM [User]
