@@ -2,7 +2,7 @@
 	@tag NVARCHAR(64)
 AS
 BEGIN
-	INSERT INTO	[Tag] ([Tag])
-	OUTPUT [inserted].[Tag]
+	INSERT INTO	[Tag] ([Tag_Id])
+	OUTPUT [inserted].[Tag_Id]
 	VALUES (@tag)
 END

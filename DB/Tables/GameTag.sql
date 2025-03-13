@@ -11,6 +11,6 @@
 		ON DELETE CASCADE,
 	-- FK tag
 	CONSTRAINT [FK_GameTag_Tag] FOREIGN kEY ([Tag])
-		REFERENCES [Tag]([Tag])
+		REFERENCES [Tag]([Tag_Id])
 		ON DELETE CASCADE,
 )

@@ -92,6 +92,8 @@
     <Build Include="Stored Procedures\SP_Copy_Insert.sql" />
     <Build Include="Stored Procedures\SP_Copy_Update.sql" />
     <Build Include="Stored Procedures\SP_Copy_Delete.sql" />
+    <Build Include="Stored Procedures\SP_Tag_Get.sql" />
+    <Build Include="Stored Procedures\SP_Copy_GetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Script.PreDeployment.sql" />
