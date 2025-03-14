@@ -9,7 +9,8 @@ BEGIN
 			[AgeMax],
 			[NbPlayersMin],
 			[NbPlayersMax],
-			[PlayingTime]
+			[PlayingTime],
+			[CreatedAt]
 	FROM [Game]
 	WHERE [Name] LIKE '%' + @name + '%'
 END

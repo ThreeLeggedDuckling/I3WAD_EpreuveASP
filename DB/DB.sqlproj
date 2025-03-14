@@ -57,7 +57,6 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
-    <Folder Include="Triggers" />
     <Folder Include="Scripts" />
     <Folder Include="Stored Procedures" />
     <Folder Include="Functions" />
@@ -68,8 +67,6 @@
     <Build Include="Tables\Tag.sql" />
     <Build Include="Tables\Loan.sql" />
     <Build Include="Tables\Copy.sql" />
-    <Build Include="Triggers\TRG_Loan_CheckLenderIsOwner.sql" />
-    <Build Include="Triggers\TRG_Loan_CheckCopyNotIncomplete.sql" />
     <Build Include="Stored Procedures\SP_User_Insert.sql" />
     <Build Include="Functions\SF_SaltAndHash.sql" />
     <Build Include="Stored Procedures\SP_User_Update.sql" />

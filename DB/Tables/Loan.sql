@@ -23,6 +23,8 @@
 	CONSTRAINT [FK_Loan_Borrower] FOREIGN KEY ([Borrower])
 		REFERENCES [User]([User_Id])
 		ON DELETE NO ACTION,
+	-- CK prêteur différent emprunteur
+	CONSTRAINT [CK_Loan_LenderNotBorrower] CHECK ([Lender] != [Borrower]),
 	-- CK notes
 	CONSTRAINT [CK_Loan_LenderScore] CHECK ([LenderScore] IS NULL OR [LenderScore] BETWEEN 0 AND 5),
 	CONSTRAINT [CK_Loan_BorrowerScore] CHECK ([BorrowerScore] IS NULL OR [BorrowerScore] BETWEEN 0 AND 5)
