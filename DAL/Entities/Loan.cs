@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    class Loan
+    public class Loan
     {
         public Guid Loan_Id { get; set; }
         public Guid Copy { get; set; }

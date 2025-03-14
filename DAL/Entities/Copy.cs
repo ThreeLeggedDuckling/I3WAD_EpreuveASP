@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    class Copy
+    public class Copy
     {
         public Guid Copy_Id { get; set; }
         public Guid Game { get; set; }

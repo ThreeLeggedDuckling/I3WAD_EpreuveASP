@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    class Game
+    public class Game
     {
         public Guid Game_Id { get; set; }
         public string Name { get; set; }

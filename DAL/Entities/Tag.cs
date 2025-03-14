@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    class Tag
+    public class Tag
     {
         public string Tag_Id { get; set; }
     }
