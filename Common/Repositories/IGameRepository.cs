@@ -15,5 +15,6 @@ namespace Common.Repositories
         IEnumerable<TGame> GetByName(string name);
         IEnumerable<TGame> GetByTag(string tag_id);
         IEnumerable<TGame> GetNPopular(int nb_results = 10);
+        string AddTag(Guid game, string tag);
     }
 }

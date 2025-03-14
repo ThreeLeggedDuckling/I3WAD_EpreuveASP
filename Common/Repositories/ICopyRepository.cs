@@ -9,5 +9,6 @@ namespace Common.Repositories
 {
     public interface ICopyRepository<TCopy> : ICRUDRepository<TCopy, Guid>
     {
+        IEnumerable<TCopy> GetByGame(Guid game);
     }
 }

@@ -8,7 +8,7 @@ namespace Common.Repositories
 {
     public interface ITagRepository<TTag>
     {
-        Guid Insert(TTag tag_id);
+        string Insert(TTag tag_id);
         IEnumerable<TTag> Get();
         TTag Get(string tag_id);
     }

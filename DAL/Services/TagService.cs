@@ -54,7 +54,7 @@ namespace DAL.Services
             }
         }
 
-        public Guid Insert(Tag tag)
+        public string Insert(Tag tag)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -62,9 +62,9 @@ namespace DAL.Services
                 {
                     cmd.CommandText = "SP_Tag_Insert";
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue(nameof(tag), tag);
+                    cmd.Parameters.AddWithValue("tag", tag.Tag_Id);
                     connection.Open();
-                    return (Guid)cmd.ExecuteScalar();
+                    return (string)cmd.ExecuteScalar();
                 }
             }
         }

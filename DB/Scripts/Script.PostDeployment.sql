@@ -43,11 +43,11 @@ DELETE FROM @InsertedIds;
 -- insertion 4 jeux
 INSERT INTO @InsertedIds (Id)
 EXEC SP_Game_Insert     @name = N'Azul',
-                        @description = N'A boardgame where you do stuff with gems',
-                        @age_min = 10,
+                        @description = N'Artfully embellish the walls of your palace by drafting the most beautiful tiles.',
+                        @age_min = 8,
                         @age_max = 99,
                         @nb_players_min = 2,
-                        @nb_players_max = 6,
+                        @nb_players_max = 4,
                         @playing_time = 45;
 DECLARE @Game1 UNIQUEIDENTIFIER;
 SELECT @Game1 = Id FROM @InsertedIds;
@@ -55,7 +55,7 @@ DELETE FROM @InsertedIds;
 
 INSERT INTO @InsertedIds (Id)
 EXEC SP_Game_Insert     @name = N'Battleship',
-                        @description = N'Everybody knows this classic',
+                        @description = N'Detect the enemy fleet and sink it.',
                         @age_min = 8,
                         @age_max = 99,
                         @nb_players_min = 2,
@@ -66,25 +66,25 @@ SELECT @Game2 = Id FROM @InsertedIds;
 DELETE FROM @InsertedIds;
 
 INSERT INTO @InsertedIds (Id)
-EXEC SP_Game_Insert     @name = N'Cards against humanity',
-                        @description = N'The fine line between dark humor and outright intolerance',
-                        @age_min = 14,
+EXEC SP_Game_Insert     @name = N'Cards Against Humanity',
+                        @description = N'Who can come up with the most hilariously obscene answers in this party game?',
+                        @age_min = 16,
                         @age_max = 99,
-                        @nb_players_min = 3,
-                        @nb_players_max = 10,
-                        @playing_time = 50;
+                        @nb_players_min = 4,
+                        @nb_players_max = 30,
+                        @playing_time = 30;
 DECLARE @Game3 UNIQUEIDENTIFIER;
 SELECT @Game3 = Id FROM @InsertedIds;
 DELETE FROM @InsertedIds;
 
 INSERT INTO @InsertedIds (Id)
-EXEC SP_Game_Insert     @name = N'Dodo Batallions',
-                        @description = N'RTS of extinction',
+EXEC SP_Game_Insert     @name = N'Distilled',
+                        @description = N'Purchase goods, upgrade your distillery, and craft the world s finest spirits',
                         @age_min = 14,
                         @age_max = 99,
-                        @nb_players_min = 2,
-                        @nb_players_max = 8,
-                        @playing_time = 90;
+                        @nb_players_min = 1,
+                        @nb_players_max = 5,
+                        @playing_time = 100;
 DECLARE @Game4 UNIQUEIDENTIFIER;
 SELECT @Game4 = Id FROM @InsertedIds;
 DELETE FROM @InsertedIds;
@@ -96,8 +96,8 @@ VALUES ('Cooperation'), ('Team'), ('Dices'), ('Cards'), ('Board'), ('Money');
 
 
 -- association jeux - tags
---INSERT INTO [GameTag] (Game, Tag)
---VALUES (@Game1, 'Board'), (@Game2, 'Board'), (@Game3, 'Cards'), (@Game4, 'Teams'), (@Game4, 'Board')
+INSERT INTO [GameTag] (Game, Tag)
+VALUES (@Game1, 'Board'), (@Game2, 'Board'), (@Game3, 'Cards'), (@Game4, 'Team'), (@Game4, 'Board')
 
 
 -- insertion exemplaires

@@ -15,6 +15,22 @@ namespace DAL.Services
     {
         private const string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EpreuveASP-DB;Integrated Security=True;";
 
+        public string AddTag(Guid game_id, string tag)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "SP_GameTag_Insert";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue(nameof(game_id), game_id);
+                    cmd.Parameters.AddWithValue(nameof(tag), tag);
+                    connection.Open();
+                    return (string)cmd.ExecuteScalar();
+                }
+            }
+        }
+
         public IEnumerable<Game> Get()
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -75,7 +91,7 @@ namespace DAL.Services
             }
         }
 
-        public IEnumerable<Game> GetByTag(string tag_id)
+        public IEnumerable<Game> GetByTag(string tag)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -83,7 +99,7 @@ namespace DAL.Services
                {
                     cmd.CommandText = "SP_Game_GetByTag";
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue(nameof(tag_id), tag_id);
+                    cmd.Parameters.AddWithValue(nameof(tag), tag);
                     connection.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

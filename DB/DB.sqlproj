@@ -60,6 +60,7 @@
     <Folder Include="Scripts" />
     <Folder Include="Stored Procedures" />
     <Folder Include="Functions" />
+    <Folder Include="Triggers" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
@@ -93,9 +94,9 @@
     <Build Include="Stored Procedures\SP_Copy_GetById.sql" />
     <Build Include="Stored Procedures\SP_Loan_GetById.sql" />
     <Build Include="Stored Procedures\SP_Tag_GetAll.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <PreDeploy Include="Scripts\Script.PreDeployment.sql" />
+    <Build Include="Stored Procedures\SP_Copy_GetByGame.sql" />
+    <Build Include="Triggers\TRG_Loan_CheckCopyNotIncomplete.sql" />
+    <Build Include="Triggers\TRG_Loan_CheckLenderIsOwner.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

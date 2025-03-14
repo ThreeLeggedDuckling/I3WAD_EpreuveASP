@@ -49,6 +49,27 @@ namespace DAL.Services
             }
         }
 
+        public IEnumerable<Copy> GetByGame(Guid game)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "SP_Copy_GetByGame";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue(nameof(game), game);
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return reader.ToCopy();
+                        }
+                    }
+                }
+            }
+        }
+
         public Guid Insert(Copy copy)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -57,8 +78,8 @@ namespace DAL.Services
                 {
                     cmd.CommandText = "SP_Copy_Insert";
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue(nameof(copy.Game), copy.Game);
-                    cmd.Parameters.AddWithValue(nameof(copy.Owner), copy.Owner);
+                    cmd.Parameters.AddWithValue("game_id", copy.Game);
+                    cmd.Parameters.AddWithValue("user_id", copy.Owner);
                     cmd.Parameters.AddWithValue(nameof(copy.State), copy.State);
                     connection.Open();
                     return (Guid)cmd.ExecuteScalar();

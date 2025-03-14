@@ -10,7 +10,7 @@ namespace DAL.Entities
     {
         public Guid Copy_Id { get; set; }
         public Guid Game { get; set; }
-        public Guid Owner { get; set; }
+        public Guid? Owner { get; set; }
         public string State { get; set; }
     }
 }

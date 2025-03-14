@@ -86,8 +86,7 @@ namespace DAL.Services
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue(nameof(user_id), user_id);
                     cmd.Parameters.AddWithValue("copy_id", loan.Copy);
-                    cmd.Parameters.AddWithValue(nameof(loan.LoanDate), loan.LoanDate);
-                    cmd.Parameters.AddWithValue(nameof(loan.ReturnDate), loan.ReturnDate);
+                    cmd.Parameters.AddWithValue("loan_date", loan.LoanDate);
                     cmd.Parameters.AddWithValue(nameof(loan.Borrower), loan.Borrower);
                     connection.Open();
                     return (Guid)cmd.ExecuteScalar();
