@@ -2,6 +2,7 @@
 using DAL.Entities;
 using DAL.Mappers;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Services
 {
-    public class CopyService : ICopyRepository<Copy>
+    public class CopyService : BaseService, ICopyRepository<Copy>
     {
-        private const string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EpreuveASP-DB;Integrated Security=True;";
+        public CopyService(IConfiguration config) : base(config, "Main-DB") { }
 
         public void Delete(Guid copy_id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -32,7 +33,7 @@ namespace DAL.Services
 
         public Copy Get(Guid copy_id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -51,7 +52,7 @@ namespace DAL.Services
 
         public IEnumerable<Copy> GetByGame(Guid game)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -72,7 +73,7 @@ namespace DAL.Services
 
         public Guid Insert(Copy copy)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -89,7 +90,7 @@ namespace DAL.Services
 
         public void Update(Guid copy_id, Copy copy)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {

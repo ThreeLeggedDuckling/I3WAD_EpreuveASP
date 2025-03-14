@@ -2,6 +2,7 @@
 using DAL.Entities;
 using DAL.Mappers;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Services
 {
-    public class LoanService : ILoanRepository<Loan>
+    public class LoanService : BaseService, ILoanRepository<Loan>
     {
-        private const string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EpreuveASP-DB;Integrated Security=True;";
+        public LoanService(IConfiguration config) : base(config, "Main-DB") { }
 
         public Loan Get(Guid loan_id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -36,7 +37,7 @@ namespace DAL.Services
 
         public IEnumerable<Loan> GetByBorrower(Guid borrower_id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -57,7 +58,7 @@ namespace DAL.Services
 
         public IEnumerable<Loan> GetByLender(Guid lender_id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -78,7 +79,7 @@ namespace DAL.Services
 
         public Guid Insert(Guid user_id, Loan loan)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -96,7 +97,7 @@ namespace DAL.Services
 
         public void Update(Guid loan_id, Loan loan)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {

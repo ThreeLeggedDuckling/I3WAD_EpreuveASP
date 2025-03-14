@@ -2,6 +2,7 @@
 using DAL.Entities;
 using DAL.Mappers;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Services
 {
-    public class GameService : IGameRepository<Game>
+    public class GameService : BaseService, IGameRepository<Game>
     {
-        private const string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EpreuveASP-DB;Integrated Security=True;";
+        public GameService(IConfiguration config) : base(config, "Main-DB") { }
 
         public string AddTag(Guid game_id, string tag)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -33,7 +34,7 @@ namespace DAL.Services
 
         public IEnumerable<Game> Get()
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -53,7 +54,7 @@ namespace DAL.Services
 
         public Game Get(Guid game_id)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                using (SqlCommand cmd = connection.CreateCommand())
                {
@@ -72,7 +73,7 @@ namespace DAL.Services
 
         public IEnumerable<Game> GetByName(string name)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                using (SqlCommand cmd = connection.CreateCommand())
                {
@@ -93,7 +94,7 @@ namespace DAL.Services
 
         public IEnumerable<Game> GetByTag(string tag)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                using (SqlCommand cmd = connection.CreateCommand())
                {
@@ -114,7 +115,7 @@ namespace DAL.Services
 
         public IEnumerable<Game> GetNPopular(int nb_results)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                using (SqlCommand cmd = connection.CreateCommand())
                {
@@ -135,7 +136,7 @@ namespace DAL.Services
 
         public Guid Insert(Game game)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                using (SqlCommand cmd = connection.CreateCommand())
                {

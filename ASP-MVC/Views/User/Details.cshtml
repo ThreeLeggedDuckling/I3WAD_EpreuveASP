@@ -4,33 +4,19 @@
     ViewData["Title"] = "Details";
 }
 
-@if (sessionManager.ConnectedUser is not null)
-{
-    <div>
-        <p>Connected as : @sessionManager.ConnectedUser.User_Id</p>
-    </div>
-}
-
 <div>
-    <h4>UserDetails</h4>
+    <h3>@Html.DisplayFor(model => model.Username) Profile</h3>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-    </dl>
+
+    @if (sessionManager.ConnectedUser?.User_Id == Model.User_Id)
+    {
+        <a asp-action="Edit" asp-controller="User" asp-route-id="@Model.User_Id">Change Username</a>
+    }
 </div>
 
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <h4>
+        @((sessionManager.ConnectedUser?.User_Id == Model.User_Id) ? "My" : Model.Username) Games
+    </h4>
+    @* ici vue partielle de la liste des exemplaires possédés par l'utilisateur (propriété OwnedGames)  *@
 </div>

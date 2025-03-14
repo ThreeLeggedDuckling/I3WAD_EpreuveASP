@@ -1,9 +1,12 @@
-﻿using ASP_MVC.Mappers;
+﻿using ASP_MVC.Handlers.ActionFilters;
+using ASP_MVC.Mappers;
 using ASP_MVC.Models.User;
 using BLL.Entities;
 using Common.Repositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
 
 namespace ASP_MVC.Controllers
 {
@@ -16,14 +19,12 @@ namespace ASP_MVC.Controllers
             _userService = userService;
         }
 
-        // VOIR QUOI FAIRE POUR INDEX
-        // GET: UserController
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
-        // GET: UserController/Details/5
+        // affichage compte utilisateur
         public ActionResult Details(Guid id)
         {
             try
@@ -37,20 +38,27 @@ namespace ASP_MVC.Controllers
             }
         }
 
-        // GET: UserController/Create
+        // création compte
+        [AnonymousNeeded]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: UserController/Create
+        // traitement création compte
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(UserCreateForm form)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                // ajout erreur formulaire si n'accepte pas les conditions d'utilisation
+                if (!form.Consent) ModelState.AddModelError(nameof(form.Consent), "You must read and accept the Terms and Conditions");
+                // gestion des erreurs du formulaire
+                if (!ModelState.IsValid) throw new ArgumentException(nameof(form));
+
+                Guid id = _userService.Insert(form.ToBLL());
+                return RedirectToAction(nameof(Details), new { id = id });
             }
             catch
             {

@@ -18,9 +18,10 @@ namespace BLL.Entities
         public bool IsDisabled {
             get { return _disabledAt is not null; }
         }
-        public IEnumerable<Copy> OwnedGames { get; set; }
-        public IEnumerable<Loan> LendedGames { get; set; }
-        public IEnumerable<Loan> BorrowedGames { get; set; }
+        // a changer avvec services
+        //public IEnumerable<Copy> OwnedGames { get; set; }
+        //public IEnumerable<Loan> LendedGames { get; set; }
+        //public IEnumerable<Loan> BorrowedGames { get; set; }
 
         public User(Guid user_Id)
         {

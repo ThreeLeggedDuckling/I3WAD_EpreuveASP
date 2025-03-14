@@ -25,9 +25,8 @@ namespace ASP_MVC
                 });
             // ajout session manager
             builder.Services.AddScoped<SessionManager>();
-            // injection services DAL et BLL    !!! à modifier quand fini test console
-            builder.Services.AddScoped<IUserRepository<DAL.Entities.User>, DAL.Services.UserService>();
             builder.Services.AddScoped<IUserRepository<BLL.Entities.User>, BLL.Services.UserService>();
+            builder.Services.AddScoped<IUserRepository<DAL.Entities.User>, DAL.Services.UserService>();
 
             var app = builder.Build();
 

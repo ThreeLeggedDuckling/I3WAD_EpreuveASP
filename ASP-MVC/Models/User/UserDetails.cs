@@ -19,7 +19,7 @@ namespace ASP_MVC.Models.User
         [DataType(DataType.Date)]
         public DateOnly CreatedAt { get; set; }
 
-        [DisplayName("Owned games")]
-        public IEnumerable<CopyListItem> OwnedGames { get; set; }
+        //[DisplayName("Owned games")]
+        //public IEnumerable<CopyListItem> OwnedGames { get; set; }
     }
 }

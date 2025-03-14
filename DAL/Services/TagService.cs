@@ -2,6 +2,7 @@
 using DAL.Entities;
 using DAL.Mappers;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Services
 {
-    public class TagService : ITagRepository<Tag>
+    public class TagService : BaseService, ITagRepository<Tag>
     {
-        private const string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EpreuveASP-DB;Integrated Security=True;";
+        public TagService(IConfiguration config) : base(config, "Main-DB") { }
 
         public IEnumerable<Tag> Get()
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -37,7 +38,7 @@ namespace DAL.Services
 
         public Tag Get(string tag)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
@@ -56,7 +57,7 @@ namespace DAL.Services
 
         public string Insert(Tag tag)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = connection.CreateCommand())
                 {

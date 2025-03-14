@@ -14,8 +14,15 @@ namespace ASP_MVC.Mappers
                 Email = user.Email,
                 Username = user.Username,
                 CreatedAt = DateOnly.FromDateTime(user.CreatedAt),
-                OwnedGames = user.OwnedGames.Select(bll => bll.ToListItem())
+                //OwnedGames = user.OwnedGames.Select(bll => bll.ToListItem())
             };
         }
+
+        public static User ToBLL(this UserCreateForm user)
+        {
+            if (user is null) throw new ArgumentNullException(nameof(user));
+            return new User(user.Email, user.Username, user.Password);
+        }
+
     }
 }

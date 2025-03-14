@@ -20,5 +20,15 @@ namespace ASP_MVC.Handlers
             }
         }
 
+        public void Login(ConnectedUser user)
+        {
+            ConnectedUser = user;
+        }
+
+        public void Logout()
+        {
+            ConnectedUser = null;
+        }
+
     }
 }
